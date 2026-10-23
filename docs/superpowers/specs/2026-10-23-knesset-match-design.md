@@ -71,5 +71,17 @@ knesset-match/
 - Unit tests for vote selection (final whole-bill vote, ≥40 threshold) and scoring (0.5 abstention, absence excluded, don't-know excluded, list mapping).
 - Manual check in the browser at phone width before publishing; spot-check 5 laws' MK votes against the Knesset site.
 
+## 26th lists data (done during design)
+- Candidates: Kipa's full lists (published 2026-10-21). Realistic spots = round(average of 8 polls, one per pollster, 19–22 Oct 2026) + 2; lists averaging below the threshold are excluded.
+- Seats used: Likud 23, Yashar 23, Together 15, Democrats 11, Joint List 11 (only 10 names published), Otzma 10, Shas 10, UTJ 10, Yisrael Beiteinu 10, RZP-Zehut 9, Ra'am 8, Reservists-NEP 5, Amcha Yisrael 3.
+- Matching to 25th-Knesset MKs (152 people, `KNS_PersonToPosition`, PositionID 43/61): automatic by name, then a manual last-name-only review (name variants: גד/גדי איזנקוט, מרים/מירי רגב, אליהו/אלי כהן, יחיאל/חילי טרופר, בעז/בועז ביסמוט, ואליד אל הואשלה/אלהואשלה). Result: 72 of 147 realistic spots are former MKs.
+
+## Phase 2 (by 2026-10-25): "declared positions" view
+A third results tab, "עמדות מוצהרות", for **20–25 high-profile laws** (draft law, judicial overhaul, death penalty for terrorists, broadcasting law, …).
+- One position per list per law, from the platform or public statements by the list or its leading candidates: for = 1, against = 0, **contradictory statements = 0.5**, **no statement = not counted**.
+- Every position stores a source (URL + short quote + date) and is shown with a link from the results.
+- Research runs with parallel subagents; every cell needs a real source — never inferred from ideology.
+- Laws outside the set are not counted in this view; its basis line shows how many answered laws it covers.
+
 ## Out of scope (v1)
 Accounts, a backend, comparing individual MKs, non-Knesset candidates' positions, English UI.
