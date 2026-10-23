@@ -92,7 +92,7 @@ def main():
     lists = load(os.path.join(ROOT, "content", "lists.json"))
     data = build_data(laws, load(os.path.join(RAW, "results.json")), load(os.path.join(RAW, "votes.json")),
                       load(os.path.join(RAW, "positions.json")), load(os.path.join(RAW, "people.json")), lists)
-    for name in ("polls", "voterinfo"):
+    for name in ("polls", "voterinfo", "declared"):
         path = os.path.join(ROOT, "content", name + ".json")
         data[name] = load(path) if os.path.exists(path) else None
     for law in data["laws"]:

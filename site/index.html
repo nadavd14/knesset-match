@@ -16,18 +16,25 @@
 </head>
 <body>
   <header class="top">
-    <a class="brand" href="./">מי מצביע כמוני?</a>
-    <a class="nav" href="#info">מידע לבוחר</a>
+    <div class="top-inner">
+      <a class="brand" href="#"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3.2L13 4.8" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>מי מצביע כמוני?</a>
+      <nav class="nav" aria-label="ניווט">
+        <a href="#" data-nav="quiz">החידון</a>
+        <a href="#info" data-nav="info">מידע לבוחר</a>
+      </nav>
+    </div>
   </header>
-  <main id="app" aria-live="polite"><p class="loading">טוען…</p></main>
+  <main id="app"><p class="loading">טוען…</p></main>
   <footer class="method">
-    <h2>איך זה מחושב</h2>
+    <details>
+    <summary>איך זה מחושב?</summary>
     <ul>
       <li>חצי מהשאלות הן חוקים שעברו (ההצבעה הסופית על החוק כולו) וחצי הן הצעות חוק שהמליאה דחתה, כך שכל סבב של 10 מאוזן. רק הצבעות שהשתתפו בהן לפחות 40 ח״כים. חוקי התקציב השנתיים לא נכללו.</li>
       <li>ח״כ שהצביע כמוכם = התאמה מלאה, הפוך מכם = אפס, נמנע או נוכח במליאה בלי להצביע = חצי. ח״כ שלא הצביע לא נספר. "לא יודע" מוציא את החוק מהחישוב.</li>
       <li><b>רשימות 2026:</b> לפי ההצבעות האישיות של מועמדים במקומות ריאליים שכיהנו בכנסת ה-25, גם אם ישבו אז בסיעה אחרת. מקום ריאלי = ממוצע הסקרים ועוד 2. מועמדים חדשים לא נספרים, כי אין להם היסטוריית הצבעות.</li>
       <li><b>סיעות הכנסת ה-25:</b> כל ח״כ נספר בסיעה שבה ישב ביום ההצבעה.</li>
     </ul>
+    </details>
     <p class="fine" id="sources">מקורות: מאגר הנתונים הפתוח של הכנסת · רשימות המועמדים כפי שפורסמו בכיפה (21.10.2026) · ממוצע 8 סקרים, 19–22.10.2026 · סמלי המפלגות מוויקיפדיה ומוויקישיתוף, לזיהוי בלבד.
       האתר אינו ממליץ למי להצביע ואינו קשור לאף מפלגה. התשובות לא יוצאות מהמכשיר שלך.
       <a href="https://github.com/nadavd14/knesset-match">קוד ונתונים</a></p>

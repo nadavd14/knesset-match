@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { scoreFactions, scoreLists, nextBatch, breakdown } from "../site/score.js";
+import { scoreFactions, scoreLists, nextBatch, breakdown, scoreDeclared, declaredBreakdown } from "../site/score.js";
 
 // law 1: A has 3 for + 2 against, B one abstain; law 2: A one for, B one against.
 const data = {
@@ -132,4 +132,45 @@ test("breakdown by MK ids uses personal votes and skips laws with no votes", () 
   const rows = breakdown({ 1: 0, 3: 1 }, data, { mkIds: ["11", "21"] });
   assert.equal(rows.length, 1); // law 3 has no votes from these MKs
   assert.deepEqual(rows[0], { lawId: "1", user: 0, n: 2, forPct: 50, againstPct: 0, abstainPct: 50, pct: 25 });
+});
+
+const decl = {
+  lists: [{ id: "x", name: "X" }, { id: "y", name: "Y" }, { id: "z", name: "Z" }],
+  declared: {
+    laws: [1, 2, 3],
+    lists: {
+      x: { positions: { 1: { stance: "for", sources: [{ url: "u" }] }, 2: { stance: "mixed" }, 3: { stance: "none" } } },
+      y: { positions: { 1: { stance: "against" }, 2: { stance: "none" }, 3: { stance: "none" } } },
+      z: { positions: {} },
+    },
+  },
+};
+
+test("declared: for/against/mixed scored, none skipped", () => {
+  const r = Object.fromEntries(scoreDeclared({ 1: 1, 2: 1, 3: 0, 9: 1 }, decl).map((x) => [x.id, x]));
+  assert.equal(r.x.pct, 75); // law1 1, law2 0.5; law3 none
+  assert.equal(r.x.laws, 2);
+  assert.equal(r.x.answered, 3); // answered laws that are in the declared set
+  assert.equal(r.y.pct, 0);
+  assert.equal(r.z.pct, null);
+});
+
+test("declared: dont-know and laws outside the set are ignored", () => {
+  const r = Object.fromEntries(scoreDeclared({ 1: null, 9: 1 }, decl).map((x) => [x.id, x]));
+  assert.equal(r.x.pct, null);
+  assert.equal(r.x.answered, 0);
+});
+
+test("declared: sorted desc with nulls last", () => {
+  assert.deepEqual(scoreDeclared({ 1: 0 }, decl).map((x) => x.id), ["y", "x", "z"]);
+});
+
+test("declaredBreakdown lists each answered declared law with stance and sources", () => {
+  const rows = declaredBreakdown({ 1: 0, 2: 1, 3: 1 }, decl, "x");
+  assert.deepEqual(rows.map((r) => [r.lawId, r.stance, r.pct]), [["1", "for", 0], ["2", "mixed", 50], ["3", "none", null]]);
+  assert.deepEqual(rows[0].sources, [{ url: "u" }]);
+});
+
+test("declared view absent in data gives empty results", () => {
+  assert.deepEqual(scoreDeclared({ 1: 1 }, { lists: [] }), []);
 });

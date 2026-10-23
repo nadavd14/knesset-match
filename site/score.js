@@ -105,3 +105,38 @@ export function nextBatch(data, answers, categories, n = 10, rand = Math.random)
   }
   return out;
 }
+
+// Declared positions (platforms and public statements), not votes.
+// for = 1, against = 0, mixed (contradictory statements) = 0.5, none = law not counted.
+const STANCE = { for: 1, against: 0, mixed: 0.5 };
+
+function declaredAnswers(answers, data) {
+  const set = new Set((data.declared?.laws || []).map(String));
+  return answered(answers).filter(([lawId]) => set.has(lawId));
+}
+
+export function scoreDeclared(answers, data) {
+  if (!data.declared) return [];
+  const mine = declaredAnswers(answers, data);
+  return data.lists.map((list) => {
+    const positions = data.declared.lists[list.id]?.positions || {};
+    let sum = 0, n = 0;
+    for (const [lawId, user] of mine) {
+      const v = STANCE[positions[lawId]?.stance];
+      if (v === undefined) continue;
+      sum += 1 - Math.abs(user - v);
+      n += 1;
+    }
+    return { id: list.id, name: list.name, pct: n ? Math.round((sum / n) * 100) : null, laws: n, answered: mine.length };
+  }).sort(byPct);
+}
+
+export function declaredBreakdown(answers, data, listId) {
+  const positions = data.declared?.lists[listId]?.positions || {};
+  return declaredAnswers(answers, data).map(([lawId, user]) => {
+    const p = positions[lawId] || { stance: "none" };
+    const v = STANCE[p.stance];
+    return { lawId, user, stance: p.stance, pct: v === undefined ? null : Math.round((1 - Math.abs(user - v)) * 100),
+      sources: p.sources || [], note: p.note };
+  });
+}
