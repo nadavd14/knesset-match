@@ -36,7 +36,7 @@ a { color: var(--accent); }
 .top, main, .method { max-width: 620px; margin: 0 auto; padding: 0 16px; }
 .top { padding-top: 20px; padding-bottom: 8px; }
 .brand { font-weight: 800; font-size: 20px; color: var(--ink); text-decoration: none; letter-spacing: -0.2px; }
-main { min-height: 60vh; padding-bottom: 32px; }
+main { min-height: 60vh; padding-bottom: 32px; overflow-wrap: anywhere; }
 .loading, .error { color: var(--muted); padding: 40px 0; text-align: center; }
 
 h1 { font-size: 30px; line-height: 1.2; margin: 24px 0 10px; letter-spacing: -0.5px; }

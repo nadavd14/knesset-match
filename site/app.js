@@ -198,6 +198,7 @@ function renderInfo() {
         day.findStation ? h("li", {}, h("a", { href: day.findStation, target: "_blank", rel: "noopener" }, "איתור הקלפי שלך באתר ועדת הבחירות")) : null),
       day.howSeatsWork ? [h("h2", {}, "איך קול הופך למנדט"), h("p", {}, day.howSeatsWork)] : null) : null,
     h("h2", {}, "הרשימות"),
+    h("p", { class: "note" }, "אותיות הפתק והסכמי העודפים: לפי פרסומי ועדת הבחירות המרכזית (ילקוט הפרסומים 15045, 19.10.2026)."),
     polls ? h("p", { class: "note" }, `נתוני הסקרים: ${polls.polls} סקרים אחרונים, אחד מכל גוף סוקר, ${formatDate(polls.since)}–${formatDate(polls.until)}. מ-24.10 אסור לפרסם סקרים חדשים.`) : null,
     data.lists.map((list) => {
       const li = info && info.lists && info.lists[list.id];
@@ -208,9 +209,11 @@ function renderInfo() {
         li && li.leader ? h("p", { class: "meta" }, `בראש הרשימה: ${li.leader}`) : null,
         poll ? h("p", {}, `בסקרים: עוברת את אחוז החסימה ב-${poll.passing} מתוך ${poll.polled} סקרים · ממוצע ${poll.avgSeats} מנדטים`) : null,
         h("p", {}, "מצע: ", li && li.platformUrl ? h("a", { href: li.platformUrl, target: "_blank", rel: "noopener" }, "למצע המפלגה") : "לא מצאנו מצע שפורסם לבחירות האלה"),
-        li && li.planUrls && li.planUrls.length ? h("p", {}, "תוכניות שפורסמו: ", li.planUrls.map((p, i) =>
-          [i ? " · " : "", h("a", { href: p.url, target: "_blank", rel: "noopener" }, p.title)])) : null,
-        h("p", {}, "הסכם עודפים: ", partners.length ? partners.map((p) => p.name).join(", ") : "לא ידוע לנו על הסכם"),
+        li && li.platformNote ? h("p", { class: "meta" }, li.platformNote) : null,
+        li && li.website ? h("p", { class: "meta" }, h("a", { href: li.website, target: "_blank", rel: "noopener" }, "אתר המפלגה")) : null,
+        li && li.planUrls && li.planUrls.length ? h("p", {}, "תוכניות שפורסמו: ", li.planUrls.flatMap((p, i) =>
+          [i ? " · " : "", h("a", { href: p.url, target: "_blank", rel: "noopener" }, (p.title || "").trim() || "קישור")])) : null,
+        h("p", {}, "הסכם עודפים: ", partners.length ? partners.map((p) => p.name).join(", ") : "לא חתמה על הסכם עודפים"),
         h("p", { class: "meta" }, "10 הראשונים: ", list.candidates.slice(0, 10).map((c) => c.name).join(" · ")),
         h("p", {}, h("a", { href: `#list/${list.id}` }, "איך הצביעו חברי הרשימה לעומתכם ›")));
     }),

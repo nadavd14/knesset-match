@@ -1,0 +1,186 @@
+{
+  "lists": {
+    "yashar": {
+      "ballotLetters": "דרך",
+      "leader": "גדי איזנקוט",
+      "website": "https://yasharwitheisenkot.com/",
+      "platformUrl": "https://yasharwitheisenkot.com/principles/",
+      "platformNote": "אין מסמך מצע אחד; באתר המפלגה מוצג עמוד \"תכניות\" עם תוכניות לפי נושא.",
+      "planUrls": [
+        {"title": "ישר! להזנקת הכלכלה הישראלית והורדת יוקר המחיה", "url": "https://yasharwitheisenkot.com/principles/economics/"},
+        {"title": "ישר! לביטחון פנים, משילות, והחזרת החוק והסדר לרחובות", "url": "https://yasharwitheisenkot.com/principles/homeland-security/"},
+        {"title": "ישר! לשירות ממלכתי לכל", "url": "https://yasharwitheisenkot.com/principles/service-for-all/"},
+        {"title": "ישר! להוקרה ולתגמול משרתי המילואים והסדיר", "url": "https://yasharwitheisenkot.com/principles/reservists-honour-and-compensation/"},
+        {"title": "ישר! לחינוך ממלכתי ומצטיין", "url": "https://yasharwitheisenkot.com/principles/education/"},
+        {"title": "ישר! לדיור", "url": "https://yasharwitheisenkot.com/principles/housing/"},
+        {"title": "ישר! לבריאות", "url": "https://yasharwitheisenkot.com/principles/healthcare/"},
+        {"title": "ישר! לשיקום ושגשוג הצפון", "url": "https://yasharwitheisenkot.com/principles/north-reconstruction-and-prosperity/"}
+      ],
+      "sources": ["https://www.gov.il/he/pages/candidates-lists-26", "https://www.kipa.co.il/חדשות/1234315-0/", "https://www.idi.org.il/policy/parties-and-elections/elections/2026-1/", "https://yasharwitheisenkot.com/principles/"]
+    },
+    "likud": {
+      "ballotLetters": "מחל",
+      "leader": "בנימין נתניהו",
+      "website": "https://www.likud.org.il/",
+      "platformUrl": "https://www.likud.org.il/#values",
+      "platformNote": "לא נמצא מצע מפורט. באתר יש מקטע \"הדרך שלנו – ששת העמודים של הליכוד\" עם עקרונות כלליים בלבד (ביטחון, כלכלה, ירושלים וארץ ישראל, חינוך, חברה ופריפריה, ישראל בעולם).",
+      "planUrls": [],
+      "sources": ["https://www.gov.il/he/pages/candidates-lists-26", "https://www.kipa.co.il/חדשות/1234315-0/", "https://www.idi.org.il/policy/parties-and-elections/elections/2026-1/", "https://www.likud.org.il/"]
+    },
+    "together": {
+      "ballotLetters": "רק",
+      "leader": "נפתלי בנט",
+      "website": "https://be-yahad.org.il/",
+      "platformUrl": "https://be-yahad.org.il/plans/",
+      "platformNote": "אין מסמך מצע אחד; באתר מוצג עמוד \"תכניות\" עם תוכניות עבודה לפי נושא.",
+      "planUrls": [
+        {"title": "רק ביחד נוריד את יוקר המחיה", "url": "https://be-yahad.org.il/plans/yokermichya/"},
+        {"title": "רק ביחד נשמור על הביטחון הלאומי", "url": "https://be-yahad.org.il/plans/natsec/"},
+        {"title": "רק ביחד נתקן את הריבונות והביטחון האישי", "url": "https://be-yahad.org.il/plans/personal-security/"},
+        {"title": "״ביחד נתקן״ – חוק המשרתים", "url": "https://be-yahad.org.il/plans/meshartim/"},
+        {"title": "רק ביחד נתקן את מערכת החינוך", "url": "https://be-yahad.org.il/plans/education/"},
+        {"title": "רק ביחד נתקן את מערכת הבריאות", "url": "https://be-yahad.org.il/plans/health/"},
+        {"title": "רק ביחד נתקן את משבר הדיור", "url": "https://be-yahad.org.il/plans/housing/"},
+        {"title": "רק ביחד נתקן את התחבורה בישראל", "url": "https://be-yahad.org.il/plans/transport/"}
+      ],
+      "sources": ["https://www.gov.il/he/pages/candidates-lists-26", "https://www.kipa.co.il/חדשות/1234315-0/", "https://www.idi.org.il/policy/parties-and-elections/elections/2026-1/", "https://be-yahad.org.il/plans/"]
+    },
+    "democrats": {
+      "ballotLetters": "אמת",
+      "leader": "יאיר גולן",
+      "website": "https://democrats.org.il/",
+      "platformUrl": "https://democrats.org.il/wp-content/uploads/2026/08/plan-8-26-he.pdf",
+      "platformNote": "קובץ PDF של תוכנית העבודה המלאה (הועלה באוגוסט 2026), שמקושר מדף הבית של המפלגה. יש גם אתר תוכניות נפרד: yes.democrats.org.il.",
+      "planUrls": [
+        {"title": "מדיני־ביטחוני", "url": "https://yes.democrats.org.il/topics/security-diplomatic"},
+        {"title": "דמוקרטיה ומשפט", "url": "https://yes.democrats.org.il/topics/democracy-justice"},
+        {"title": "כלכלי־חברתי", "url": "https://yes.democrats.org.il/topics/economy-society"},
+        {"title": "ביטחון פנים", "url": "https://yes.democrats.org.il/topics/public-safety"},
+        {"title": "גיוס וחלוקה בנטל", "url": "https://yes.democrats.org.il/topics/sharing-the-burden"},
+        {"title": "חינוך", "url": "https://yes.democrats.org.il/topics/education"},
+        {"title": "בריאות", "url": "https://yes.democrats.org.il/topics/health"},
+        {"title": "שיקום ופיתוח הצפון", "url": "https://yes.democrats.org.il/topics/develop_north_israel"}
+      ],
+      "sources": ["https://www.gov.il/he/pages/candidates-lists-26", "https://www.kipa.co.il/חדשות/1234315-0/", "https://www.idi.org.il/policy/parties-and-elections/elections/2026-1/", "https://democrats.org.il/", "https://yes.democrats.org.il/"]
+    },
+    "joint": {
+      "ballotLetters": "ודם",
+      "leader": "יוסף ג'בארין",
+      "website": "https://jointlist.org.il/he/",
+      "platformUrl": "https://jointlist.org.il/he/platform/",
+      "platformNote": "מצע מלא לבחירות לכנסת ה-26 (\"מצע המשותפת\") באתר הרשימה. בכינוי הרשימה אצל ועדת הבחירות לא מופיע שם העומד בראשה; את ג'בארין כמספר 1 מציינים כיפה וויקיפדיה.",
+      "planUrls": [
+        {"title": "התוכנית הכלכלית-חברתית", "url": "https://jointlist.org.il/he/economic-plan/"},
+        {"title": "תוכנית למאבק בפשיעה", "url": "https://jointlist.org.il/he/crime-plan/"}
+      ],
+      "sources": ["https://www.gov.il/he/pages/candidates-lists-26", "https://www.kipa.co.il/חדשות/1234315-0/", "https://www.idi.org.il/policy/parties-and-elections/elections/2026-1/", "https://jointlist.org.il/he/platform/", "https://he.wikipedia.org/wiki/הבחירות_לכנסת_העשרים_ושש"]
+    },
+    "otzma": {
+      "ballotLetters": "ב",
+      "leader": "איתמר בן גביר",
+      "website": "https://ozma-yeudit.co.il/",
+      "platformUrl": null,
+      "platformNote": "חיפשנו באתר המפלגה (ozma-yeudit.co.il) ובמאגר המפלגות של המכון הישראלי לדמוקרטיה, ולא מצאנו מצע. באתר יש רק עדכוני חדשות, למשל פוסט מ-15.10.2026 על \"תוכנית בן גביר למשרד הביטחון\", אבל זה לא מסמך תוכנית.",
+      "planUrls": [],
+      "sources": ["https://www.gov.il/he/pages/candidates-lists-26", "https://www.kipa.co.il/חדשות/1234315-0/", "https://www.idi.org.il/policy/parties-and-elections/elections/2026-1/", "https://ozma-yeudit.co.il/"]
+    },
+    "shas": {
+      "ballotLetters": "שס",
+      "leader": "אריה דרעי",
+      "website": null,
+      "platformUrl": null,
+      "platformNote": "לא אומת אתר רשמי: הכתובת shas.org.il שמופיעה בוויקיפדיה לא נטענה. גם במאגר המכון הישראלי לדמוקרטיה לא מופיע קישור למצע, ולא מצאנו מצע.",
+      "planUrls": [],
+      "sources": ["https://www.gov.il/he/pages/candidates-lists-26", "https://www.kipa.co.il/חדשות/1234315-0/", "https://www.idi.org.il/policy/parties-and-elections/elections/2026-1/"]
+    },
+    "utj": {
+      "ballotLetters": "ג",
+      "leader": "יעקב אשר",
+      "website": null,
+      "platformUrl": null,
+      "platformNote": "לא מצאנו אתר רשמי. גם במאגר המכון הישראלי לדמוקרטיה לא מופיע קישור למצע, ולא מצאנו מצע.",
+      "planUrls": [],
+      "sources": ["https://www.gov.il/he/pages/candidates-lists-26", "https://www.kipa.co.il/חדשות/1234315-0/", "https://www.idi.org.il/policy/parties-and-elections/elections/2026-1/"]
+    },
+    "yb": {
+      "ballotLetters": "ל",
+      "leader": "אביגדור ליברמן",
+      "website": "https://beytenu.org.il/",
+      "platformUrl": "https://beytenu.org.il/party-platform/",
+      "platformNote": "עמוד \"המצע שלנו\" באתר המפלגה, עם פרקים לפי נושא. העמוד לא נושא תאריך, ולא אומת שהוא עודכן במיוחד לבחירות 2026.",
+      "planUrls": [],
+      "sources": ["https://www.gov.il/he/pages/candidates-lists-26", "https://www.kipa.co.il/חדשות/1234315-0/", "https://www.idi.org.il/policy/parties-and-elections/elections/2026-1/", "https://beytenu.org.il/party-platform/"]
+    },
+    "rzp": {
+      "ballotLetters": "ט",
+      "leader": "בצלאל סמוטריץ'",
+      "website": "https://zionutdatit.org.il/",
+      "platformUrl": "https://zionutdatit.org.il/%D7%9E%D7%A6%D7%A2-%D7%94%D7%9E%D7%A4%D7%9C%D7%92%D7%94/",
+      "platformNote": "עמוד \"מצע המפלגה\" של הציונות הדתית. קובצי ה-PDF לפי נושא הועלו בשנים 2021–2022, כך שזה לא מצע שפורסם במיוחד לבחירות 2026. לא נמצא מצע משותף לרשימת הציונות הדתית-זהות.",
+      "planUrls": [
+        {"title": "תוכנית המשפט", "url": "https://zionutdatit.org.il/mishpat/"},
+        {"title": "תוכנית החינוך", "url": "https://zionutdatit.org.il/hinuch/"},
+        {"title": "תוכנית נגב גליל", "url": "https://zionutdatit.org.il/judaization/"}
+      ],
+      "sources": ["https://www.gov.il/he/pages/candidates-lists-26", "https://www.kipa.co.il/חדשות/1234315-0/", "https://www.idi.org.il/policy/parties-and-elections/elections/2026-1/", "https://zionutdatit.org.il/%D7%9E%D7%A6%D7%A2-%D7%94%D7%9E%D7%A4%D7%9C%D7%92%D7%94/"]
+    },
+    "raam": {
+      "ballotLetters": "עם",
+      "leader": "מנסור עבאס",
+      "website": null,
+      "platformUrl": null,
+      "platformNote": "לא מצאנו אתר רשמי פעיל: בוויקיפדיה מופיע רק אתר ישן בארכיון. גם במאגר המכון הישראלי לדמוקרטיה לא מופיע קישור למצע, ולא מצאנו מצע.",
+      "planUrls": [],
+      "sources": ["https://www.gov.il/he/pages/candidates-lists-26", "https://www.kipa.co.il/חדשות/1234315-0/", "https://www.idi.org.il/policy/parties-and-elections/elections/2026-1/"]
+    },
+    "reservists": {
+      "ballotLetters": "די",
+      "leader": "יועז הנדל",
+      "website": "https://www.themiluimnikim.org.il/",
+      "platformUrl": "https://www.themiluimnikim.org.il/platform/",
+      "platformNote": "עמוד \"עקרונות\" באתר המילואימניקים (\"עיקרי המצע\" ו\"תכניות עבודה\"). הרשימה היא ריצה משותפת עם הכלכלית (ירון זליכה), ולא נמצא מצע משותף נפרד.",
+      "planUrls": [
+        {"title": "תוכנית ביטחון ומשילות", "url": "https://www.themiluimnikim.org.il/%d7%aa%d7%95%d7%9b%d7%a0%d7%99%d7%aa-%d7%94%d7%9e%d7%a9%d7%99%d7%9c%d7%95%d7%aa/"},
+        {"title": "תוכנית PTSD", "url": "https://www.themiluimnikim.org.il/%d7%97%d7%95%d7%96%d7%a8%d7%99%d7%9d-%d7%9e%d7%94%d7%a7%d7%a8%d7%91/"}
+      ],
+      "sources": ["https://www.gov.il/he/pages/candidates-lists-26", "https://www.kipa.co.il/חדשות/1234315-0/", "https://www.idi.org.il/policy/parties-and-elections/elections/2026-1/", "https://www.themiluimnikim.org.il/platform/"]
+    },
+    "amcha": {
+      "ballotLetters": "ך",
+      "leader": "עופר וינטר",
+      "website": "https://amchaisrael.co.il/",
+      "platformUrl": "https://amchaisrael.co.il/foundations",
+      "platformNote": "\"מסמך אבני היסוד של התנועה\": מסמך עקרונות ולא מצע מפורט.",
+      "planUrls": [
+        {"title": "התוכנית הביטחונית", "url": "https://amchaisrael.co.il/security"},
+        {"title": "תכנית המשרתים", "url": "https://amchaisrael.co.il/serving-plan"},
+        {"title": "תכנית ההסברה", "url": "https://amchaisrael.co.il/hasbara"}
+      ],
+      "sources": ["https://www.gov.il/he/pages/candidates-lists-26", "https://www.kipa.co.il/חדשות/1234315-0/", "https://www.idi.org.il/policy/parties-and-elections/elections/2026-1/", "https://amchaisrael.co.il/foundations"]
+    }
+  },
+  "surplusAgreements": [
+    {"a": "together", "b": "yb", "source": "https://www.gov.il/he/pages/candidates-lists-26?chapterIndex=6"},
+    {"a": "joint", "b": "raam", "source": "https://www.gov.il/he/pages/candidates-lists-26?chapterIndex=6"},
+    {"a": "rzp", "b": "likud", "source": "https://www.gov.il/he/pages/candidates-lists-26?chapterIndex=6"},
+    {"a": "utj", "b": "shas", "source": "https://www.gov.il/he/pages/candidates-lists-26?chapterIndex=6"},
+    {"a": "democrats", "b": "yashar", "source": "https://www.gov.il/he/pages/candidates-lists-26?chapterIndex=6"}
+  ],
+  "electionDay": {
+    "hours": "ברוב הקלפיות מצביעים מ-07:00 עד 22:00. ביישובים קטנים עם עד 350 בוחרים, בבתי חולים, בבתי סוהר ובבתי אבות מצביעים מ-08:00 עד 20:00.",
+    "id": "מזדהים בקלפי רק באחת מהתעודות האלה: תעודת זהות; רישיון נהיגה בתוקף; דרכון בתוקף; תעודה צבאית אישית בתוקף שהוציא צה\"ל; תעודת שוטר (רק למי שמצביע בקלפי שלא משויכת לאזור מגוריו); תעודת חבר כנסת (מהכנסת היוצאת בלבד). ההודעה לבוחר אינה תעודה מזהה, ואין חובה להביא אותה.",
+    "findStation": "https://www.gov.il/apps/moin/bocharim/",
+    "dayOff": "יום הבחירות הוא יום שבתון לפי חוק-יסוד: הכנסת. ועדת הבחירות המרכזית קבעה רשימה של שירותים שיפעלו כרגיל, למשל תחבורה, מסעדות, בתי חולים ושירותי חירום, וחנויות מזון בין 06:00 ל-14:00. לעובדים בשירותים האלה יש לתת אפשרות להצביע.",
+    "threshold": "3.25% מהקולות הכשרים",
+    "howSeatsWork": "רק רשימה שקיבלה לפחות 3.25% מהקולות הכשרים נכנסת לחלוקת המושבים. קודם מחשבים \"מודד\": סך הקולות של הרשימות שעברו את אחוז החסימה, מחולק ב-120. כל רשימה מקבלת מושב אחד על כל מודד שלם שבקולותיה. המושבים שנשארו מחולקים בשיטת בדר-עופר: כל מושב נוסף ניתן, בזה אחר זה, לרשימה שתקבל את מספר הקולות הגבוה ביותר למושב אם יתווסף לה מושב. הסכם עודפים הוא הסכם שנחתם לפני הבחירות בין שתי רשימות. בחלוקת המושבים הנותרים שתי הרשימות נחשבות כרשימה אחת, ואחר כך המושבים שזכו בהם מתחלקים ביניהן באותה שיטה. ההסכם משפיע רק אם שתי הרשימות עברו את אחוז החסימה. הוא לא מעביר קולות של בוחר לרשימה אחרת, ובדרך כלל משפיע על מושב אחד לכל היותר.",
+    "sources": [
+      "https://www.gov.il/he/pages/elections_faq",
+      "https://www.gov.il/he/pages/26elections-info?chapterIndex=10",
+      "https://www.gov.il/he/pages/election-about-info",
+      "https://www.gov.il/he/departments/units/elections-26/govil-landing-page",
+      "https://www.bechirot.gov.il/home/",
+      "https://www.gov.il/he/pages/candidates-lists-26?chapterIndex=6",
+      "https://www.gov.il/BlobFolder/guide/candidates-lists-26/he/yp15045.pdf"
+    ]
+  }
+}
