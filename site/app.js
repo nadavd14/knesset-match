@@ -76,7 +76,9 @@ function renderStart() {
 
 function renderCard() {
   const law = lawById(state.batch[state.idx]);
+  const shownAt = Date.now();
   const answer = (v) => {
+    if (Date.now() - shownAt < 350) return; // a double tap must not also answer the next card
     state.answers[law.id] = v;
     save();
     state.idx += 1;
@@ -138,10 +140,15 @@ function shareText(rows) {
 
 async function share(text) {
   if (navigator.share) {
-    try { await navigator.share({ text }); return; } catch { /* cancelled */ }
-  } else {
-    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+    try {
+      await navigator.share({ text });
+      return;
+    } catch (e) {
+      if (e && e.name === "AbortError") return; // user cancelled
+    }
   }
+  // no Web Share, or it failed (common in in-app browsers)
+  window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank", "noopener");
 }
 
 function renderResults() {
@@ -172,7 +179,7 @@ function renderResults() {
         : h("p", { class: "note" }, "עניתם על כל החוקים בקטגוריות שבחרתם."),
       count ? h("button", { class: "btn ghost wide", onclick: () => share(shareText(lists)) }, "שתפו") : null,
       h("button", { class: "btn link", onclick: renderStart }, "שינוי קטגוריות"),
-      count ? h("button", { class: "btn link", onclick: reset }, "להתחיל מחדש") : null),
+      Object.keys(state.answers).length ? h("button", { class: "btn link", onclick: reset }, "להתחיל מחדש") : null),
   );
 }
 
