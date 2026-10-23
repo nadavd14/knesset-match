@@ -174,3 +174,13 @@ test("declaredBreakdown lists each answered declared law with stance and sources
 test("declared view absent in data gives empty results", () => {
   assert.deepEqual(scoreDeclared({ 1: 1 }, { lists: [] }), []);
 });
+
+test("declared: below the minimum basis the score is withheld", () => {
+  const r = Object.fromEntries(scoreDeclared({ 1: 1 }, decl, 2).map((x) => [x.id, x]));
+  assert.equal(r.x.pct, null); // only 1 declared stance among answered laws
+  assert.equal(r.x.laws, 1);
+  assert.equal(r.x.thin, true);
+  const ok = Object.fromEntries(scoreDeclared({ 1: 1, 2: 1 }, decl, 2).map((x) => [x.id, x]));
+  assert.equal(ok.x.pct, 75);
+  assert.equal(ok.x.thin, false);
+});

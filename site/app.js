@@ -2,6 +2,7 @@ import { scoreFactions, scoreLists, nextBatch, breakdown, scoreDeclared, declare
 
 const CATEGORIES = ["ביטחון", "משפט ושלטון", "כלכלה", "חברה ורווחה", "דת ומדינה", "חינוך ותרבות", "פנים וסביבה"];
 const BATCH = 10;
+const MIN_DECLARED = 3; // declared-positions score needs statements on at least this many answered laws
 const KEY = "km.v1";
 const app = document.getElementById("app");
 
@@ -294,7 +295,9 @@ function declaredRows(rows) {
     return r.pct === null
       ? h("li", { class: "row empty" }, h("a", { class: "rowlink", href },
           h("div", { class: "head" }, name, h("span", { class: "pct" }, "—")),
-          h("div", { class: "basis" }, "לא מצאנו הצהרות על החוקים שעניתם")))
+          h("div", { class: "basis" }, r.thin
+            ? `נמצאו הצהרות רק על ${r.laws === 1 ? "חוק אחד" : r.laws + " חוקים"} מאלה שעניתם, מעט מדי לציון`
+            : "לא מצאנו הצהרות על החוקים שעניתם")))
       : h("li", { class: "row" }, h("a", { class: "rowlink", href },
           h("div", { class: "head" }, name, h("span", { class: "pct" }, `${r.pct}%`)),
           h("div", { class: "bar", "aria-hidden": "true" }, h("span", { style: `width:${r.pct}%` })),
@@ -317,7 +320,7 @@ function renderResults() {
   const count = answeredCount();
   const lists = scoreLists(state.answers, data);
   const factions = scoreFactions(state.answers, data).filter((r) => r.pct !== null);
-  const declared = scoreDeclared(state.answers, data);
+  const declared = scoreDeclared(state.answers, data, MIN_DECLARED);
   const tab = state.tab;
   const declaredAnswered = declared.length ? declared[0].answered : 0;
   const remaining = nextBatch(poolData(), state.answers, state.focus ? [] : state.categories, 1).length;
@@ -368,6 +371,7 @@ function declaredSection(list) {
   const all = (data.declared.laws || []).map((id) => [id, d.positions[id]]).filter(([, p]) => p && p.stance !== "none");
   return [
     h("h2", { class: "section-title" }, "עמדות מוצהרות"),
+    h("p", { class: "note" }, `מצאנו עמדה פומבית עם מקור על ${all.length} מתוך ${data.declared.laws.length} החוקים הבולטים. היכן שלא מצאנו, החוק לא נספר.`),
     answeredRows.length ? h("p", { class: "note" }, `בחוקים שעניתם עליהם: ${answeredRows.filter((r) => r.pct === 100).length} התאמות, ${answeredRows.filter((r) => r.pct === 0).length} אי-התאמות, ${answeredRows.filter((r) => r.pct === 50).length} הצהרות סותרות.`) : null,
     all.length ? h("div", { class: "card" }, h("ol", { class: "rows" }, all.map(([id, p]) => {
       const law = lawById(id);

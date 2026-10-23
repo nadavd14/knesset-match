@@ -115,7 +115,7 @@ function declaredAnswers(answers, data) {
   return answered(answers).filter(([lawId]) => set.has(lawId));
 }
 
-export function scoreDeclared(answers, data) {
+export function scoreDeclared(answers, data, minLaws = 1) {
   if (!data.declared) return [];
   const mine = declaredAnswers(answers, data);
   return data.lists.map((list) => {
@@ -127,7 +127,8 @@ export function scoreDeclared(answers, data) {
       sum += 1 - Math.abs(user - v);
       n += 1;
     }
-    return { id: list.id, name: list.name, pct: n ? Math.round((sum / n) * 100) : null, laws: n, answered: mine.length };
+    const thin = n > 0 && n < minLaws;
+    return { id: list.id, name: list.name, pct: n && !thin ? Math.round((sum / n) * 100) : null, laws: n, answered: mine.length, thin };
   }).sort(byPct);
 }
 
