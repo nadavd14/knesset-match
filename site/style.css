@@ -8,7 +8,7 @@
   --accent-soft: #e4eaf5;
   --bar: #3d64ad;
   --radius: 16px;
-  --font: "Segoe UI", "Noto Sans Hebrew", "Arial Hebrew", Arial, sans-serif;
+  --font: Arial, "Noto Sans Hebrew", "Arial Hebrew", sans-serif; /* Segoe UI draws the maqaf (־) as an overline */
 }
 @media (prefers-color-scheme: dark) {
   :root {

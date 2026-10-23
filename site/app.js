@@ -106,8 +106,9 @@ function renderCard() {
 }
 
 function basisLine(r, isList) {
-  const laws = `לפי ${r.laws} ${r.laws === 1 ? "חוק" : "חוקים"}`;
-  return isList ? `${laws} · ${r.mks} ח״כים לשעבר מתוך ${r.total} מקומות ריאליים` : `${laws} · ${r.mks} ח״כים`;
+  const laws = r.laws === 1 ? "לפי חוק אחד" : `לפי ${r.laws} חוקים`;
+  const mks = r.mks === 1 ? "ח״כ אחד" : `${r.mks} ח״כים`;
+  return isList ? `${laws} · ${mks} לשעבר מתוך ${r.total} מקומות ריאליים` : `${laws} · ${mks}`;
 }
 
 function resultRows(rows, isList) {
