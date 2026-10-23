@@ -64,7 +64,7 @@ def build_data(laws, results, votes, positions, people, lists):
         mk_ids = [str(c["mkId"]) for c in lst["candidates"] if c["mkId"]]
         used.update(int(m) for m in mk_ids)
         out_lists.append({"id": lst["id"], "name": lst["name"], "seats": lst["seats"],
-                          "total": lst["seats"], "mkIds": mk_ids, "letters": lst.get("letters"),
+                          "total": lst["seats"], "mkIds": mk_ids, "letters": lst.get("letters"), "logo": lst.get("logo"),
                           "candidates": [{"name": c["name"], "mkId": str(c["mkId"]) if c["mkId"] else None}
                                          for c in lst["candidates"]]})
 

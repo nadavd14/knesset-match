@@ -53,7 +53,7 @@ class BuildShapeTest(unittest.TestCase):
         people = [{"Id": 1, "FirstName": "דנה", "LastName": "לוי"}, {"Id": 2, "FirstName": "רון", "LastName": "כהן"},
                   {"Id": 3, "FirstName": "x", "LastName": "y"}]
         lists = {"pollDate": "2026-10-22", "lists": [
-            {"id": "a", "name": "א", "seats": 3, "letters": "אב",
+            {"id": "a", "name": "א", "seats": 3, "letters": "אב", "logo": "logos/a.png",
              "candidates": [{"name": "דנה לוי", "mkId": 1}, {"name": "z", "mkId": None}]}]}
         d = build_data(laws, results, votes, POSITIONS, people, lists)
         self.assertEqual(d["laws"][0]["id"], 10)
@@ -61,7 +61,7 @@ class BuildShapeTest(unittest.TestCase):
         self.assertEqual(d["votes"]["10"], {"1": [1, "B"], "2": [0.5, "C"]})
         self.assertEqual(d["mks"], {"1": "דנה לוי", "2": "רון כהן"})
         # total = realistic spots (seats), even when fewer candidate names are known
-        self.assertEqual(d["lists"], [{"id": "a", "name": "א", "seats": 3, "total": 3, "mkIds": ["1"], "letters": "אב",
+        self.assertEqual(d["lists"], [{"id": "a", "name": "א", "seats": 3, "total": 3, "mkIds": ["1"], "letters": "אב", "logo": "logos/a.png",
                                        "candidates": [{"name": "דנה לוי", "mkId": "1"}, {"name": "z", "mkId": None}]}])
         self.assertIs(d["laws"][0]["passed"], False)
         self.assertEqual(d["pollDate"], "2026-10-22")

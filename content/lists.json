@@ -101,7 +101,9 @@
      "mkId": null
     }
    ],
-   "letters": "דרך"
+   "letters": "דרך",
+   "logo": "logos/yashar.png",
+   "logoSource": "https://commons.wikimedia.org/wiki/File:Yashar_party_logo.png"
   },
   {
    "id": "likud",
@@ -201,7 +203,9 @@
      "mkId": 30704
     }
    ],
-   "letters": "מחל"
+   "letters": "מחל",
+   "logo": "logos/likud.png",
+   "logoSource": "https://commons.wikimedia.org/wiki/File:Likud_Logo.svg"
   },
   {
    "id": "together",
@@ -269,7 +273,9 @@
      "mkId": null
     }
    ],
-   "letters": "רק"
+   "letters": "רק",
+   "logo": "logos/together.png",
+   "logoSource": "https://commons.wikimedia.org/wiki/File:Together_Israel_logo_new.svg"
   },
   {
    "id": "democrats",
@@ -321,7 +327,9 @@
      "mkId": null
     }
    ],
-   "letters": "אמת"
+   "letters": "אמת",
+   "logo": "logos/democrats.png",
+   "logoSource": "https://commons.wikimedia.org/wiki/File:The_Democrats_(Israel)_logo_2026.svg"
   },
   {
    "id": "joint",
@@ -369,7 +377,9 @@
      "mkId": null
     }
    ],
-   "letters": "ודם"
+   "letters": "ודם",
+   "logo": "logos/joint.png",
+   "logoSource": "https://commons.wikimedia.org/wiki/File:Logo_of_the_Joint_List_(Israel)_2026_(vector).svg"
   },
   {
    "id": "otzma",
@@ -417,7 +427,9 @@
      "mkId": null
     }
    ],
-   "letters": "ב"
+   "letters": "ב",
+   "logo": "logos/otzma.png",
+   "logoSource": "https://commons.wikimedia.org/wiki/File:Otzma_Yehudit_2021_logo.svg"
   },
   {
    "id": "shas",
@@ -465,7 +477,9 @@
      "mkId": 30868
     }
    ],
-   "letters": "שס"
+   "letters": "שס",
+   "logo": "logos/shas.png",
+   "logoSource": "https://en.wikipedia.org/wiki/File:Shas_logo.svg"
   },
   {
    "id": "utj",
@@ -513,7 +527,9 @@
      "mkId": null
     }
    ],
-   "letters": "ג"
+   "letters": "ג",
+   "logo": "logos/utj.png",
+   "logoSource": "https://en.wikipedia.org/wiki/File:United_Torah_Judaism_Logo_2019.svg"
   },
   {
    "id": "yb",
@@ -561,7 +577,9 @@
      "mkId": 30839
     }
    ],
-   "letters": "ל"
+   "letters": "ל",
+   "logo": "logos/yb.png",
+   "logoSource": "https://en.wikipedia.org/wiki/File:Yisrael_Beytenu_logo_2022.svg"
   },
   {
    "id": "rzp",
@@ -605,7 +623,9 @@
      "mkId": null
     }
    ],
-   "letters": "ט"
+   "letters": "ט",
+   "logo": "logos/rzp.png",
+   "logoSource": "https://commons.wikimedia.org/wiki/File:Religious_Zionist_Party_logo_2026.png"
   },
   {
    "id": "raam",
@@ -645,7 +665,9 @@
      "mkId": null
     }
    ],
-   "letters": "עם"
+   "letters": "עם",
+   "logo": "logos/raam.png",
+   "logoSource": "https://commons.wikimedia.org/wiki/File:Raam_logo_2021.svg"
   },
   {
    "id": "reservists",
@@ -673,7 +695,9 @@
      "mkId": null
     }
    ],
-   "letters": "די"
+   "letters": "די",
+   "logo": "logos/reservists.png",
+   "logoSource": "https://commons.wikimedia.org/wiki/File:Logo_of_The_Reservists.svg"
   },
   {
    "id": "amcha",
@@ -693,7 +717,9 @@
      "mkId": null
     }
    ],
-   "letters": "ך"
+   "letters": "ך",
+   "logo": "logos/amcha.png",
+   "logoSource": "https://commons.wikimedia.org/wiki/File:Amcha_Yisrael.svg"
   }
  ],
  "lettersSource": "כיפה, 21.10.2026"

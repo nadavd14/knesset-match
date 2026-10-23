@@ -136,3 +136,7 @@ h1 .letters { font-size: 17px; vertical-align: middle; margin-inline-end: 10px; 
 .card.info h2 { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
 .card.info p { margin: 6px 0; }
 .nav { float: inline-end; font-size: 15px; font-weight: 600; text-decoration: none; }
+
+.badge { display: inline-flex; align-items: center; gap: 6px; }
+.logo { height: 26px; width: 58px; object-fit: contain; background: #fff; border-radius: 6px; padding: 2px 4px; border: 1px solid var(--line); }
+h1 .logo { height: 40px; width: 96px; }

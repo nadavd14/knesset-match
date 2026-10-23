@@ -116,7 +116,10 @@ function basisLine(r, isList) {
 const listById = (id) => data.lists.find((l) => l.id === id);
 
 function badge(list) {
-  return list && list.letters ? h("span", { class: "letters", title: "האותיות על פתק ההצבעה" }, list.letters) : null;
+  if (!list) return null;
+  return h("span", { class: "badge" },
+    list.logo ? h("img", { class: "logo", src: list.logo, alt: "", loading: "lazy" }) : null,
+    list.letters ? h("span", { class: "letters", title: "האותיות על פתק ההצבעה" }, list.letters) : null);
 }
 
 function resultRows(rows, isList) {
