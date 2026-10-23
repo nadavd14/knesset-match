@@ -4,7 +4,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "pipeline"))
 from categories import category_for  # noqa: E402
-from select_votes import final_vote_by_bill, is_final_reading, participation, MIN_VOTERS  # noqa: E402
+from select_votes import final_vote_by_bill, is_final_reading, is_rejected, participation, MIN_VOTERS  # noqa: E402
 
 
 def vote(id_, item, when, subject):
@@ -36,6 +36,13 @@ class FinalReadingTest(unittest.TestCase):
         final = vote(1, 1, "2025-03-24T23:50:00+02:00", None)
         votes = [final, vote(2, 1, "2025-03-25T00:40:00+02:00", "סעיף 9")]
         self.assertTrue(is_final_reading(final, votes))
+
+
+class RejectedTest(unittest.TestCase):
+    def test_rejected_when_more_against_than_for(self):
+        self.assertTrue(is_rejected({"for": 30, "against": 50, "abstain": 1}))
+        self.assertFalse(is_rejected({"for": 50, "against": 30, "abstain": 0}))
+        self.assertFalse(is_rejected({"for": 40, "against": 40, "abstain": 0}))
 
 
 class ParticipationTest(unittest.TestCase):

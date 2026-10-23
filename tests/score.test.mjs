@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { scoreFactions, scoreLists, nextBatch } from "../site/score.js";
+import { scoreFactions, scoreLists, nextBatch, breakdown } from "../site/score.js";
 
 // law 1: A has 3 for + 2 against, B one abstain; law 2: A one for, B one against.
 const data = {
@@ -91,6 +91,45 @@ test("nextBatch returns fewer when pool is exhausted", () => {
   assert.deepEqual(nextBatch(data, answers, [], 10), []);
 });
 
+const mixed = {
+  laws: [
+    ...[1, 2, 3, 4, 5, 6, 7, 8].map((id) => ({ id, category: "כלכלה", passed: true })),
+    ...[11, 12, 13].map((id) => ({ id, category: "כלכלה", passed: false })),
+  ],
+  votes: {},
+  lists: [],
+};
+const passedCount = (ids) => ids.filter((id) => id < 10).length;
+
+test("nextBatch balances passed and rejected", () => {
+  const ids = nextBatch(mixed, {}, [], 6);
+  assert.equal(ids.length, 6);
+  assert.equal(passedCount(ids), 3);
+});
+
+test("nextBatch tops up from the other pool when one runs out", () => {
+  const ids = nextBatch(mixed, {}, [], 10);
+  assert.equal(ids.length, 10);
+  assert.equal(passedCount(ids), 7); // only 3 rejected exist
+});
+
+test("nextBatch interleaves so a batch never front-loads one pool", () => {
+  const ids = nextBatch(mixed, {}, [], 6);
+  assert.equal(passedCount(ids.slice(0, 2)), 1);
+});
+
 test("nextBatch caps at n", () => {
   assert.equal(nextBatch(data, {}, [], 2).length, 2);
+});
+
+test("breakdown by faction gives per-law shares and agreement", () => {
+  const rows = breakdown({ 1: 1, 2: null }, data, { faction: "A" });
+  assert.equal(rows.length, 1); // don't-know excluded
+  assert.deepEqual(rows[0], { lawId: "1", user: 1, n: 5, forPct: 60, againstPct: 40, abstainPct: 0, pct: 60 });
+});
+
+test("breakdown by MK ids uses personal votes and skips laws with no votes", () => {
+  const rows = breakdown({ 1: 0, 3: 1 }, data, { mkIds: ["11", "21"] });
+  assert.equal(rows.length, 1); // law 3 has no votes from these MKs
+  assert.deepEqual(rows[0], { lawId: "1", user: 0, n: 2, forPct: 50, againstPct: 0, abstainPct: 50, pct: 25 });
 });

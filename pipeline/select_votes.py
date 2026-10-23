@@ -42,6 +42,11 @@ def is_final_reading(final, bill_votes):
     return last - _ts(final) <= datetime.timedelta(days=1)
 
 
+def is_rejected(counts):
+    """The plenum turned the bill down: more against than for."""
+    return counts["against"] > counts["for"]
+
+
 def participation(results):
     """VoteID -> counts of for / against / abstain (נמנע)."""
     keys = {"בעד": "for", "נגד": "against", "נמנע": "abstain"}
@@ -74,38 +79,46 @@ def fetch_results(vote_ids):
     return cached
 
 
+def candidate(bill, v, c, committees):
+    return {
+        "billId": bill["Id"], "name": bill["Name"], "voteId": v["Id"], "voteDate": v["VoteDateTime"][:10],
+        "category": category_for(committees.get(bill["CommitteeID"])),
+        "for": c["for"], "against": c["against"], "abstain": c["abstain"],
+        "summaryLaw": bill["SummaryLaw"],
+    }
+
+
+def write(name, rows):
+    rows.sort(key=lambda x: -min(x["for"], x["against"]) / max(1, x["for"] + x["against"]))
+    with open(os.path.join(ROOT, "data", name), "w", encoding="utf-8") as fh:
+        json.dump(rows, fh, ensure_ascii=False, indent=1)
+    hist = {}
+    for x in rows:
+        hist[x["category"]] = hist.get(x["category"], 0) + 1
+    print(name, len(rows), json.dumps(hist, ensure_ascii=False))
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
-    bills = {b["Id"]: b for b in load("bills") if b["StatusID"] == PASSED}
+    bills = {b["Id"]: b for b in load("bills")}
     committees = {c["Id"]: c["Name"] for c in load("committees")}
     votes = load("votes")
     by_bill = {}
     for v in votes:
         by_bill.setdefault(v["ItemID"], []).append(v)
-    finals = {k: v for k, v in final_vote_by_bill(votes).items()
-              if k in bills and is_final_reading(v, by_bill[k])}
-    counts = participation(fetch_results([v["Id"] for v in finals.values()]))
+    finals = {k: v for k, v in final_vote_by_bill(votes).items() if k in bills}
+    passed = {k: v for k, v in finals.items()
+              if bills[k]["StatusID"] == PASSED and is_final_reading(v, by_bill[k])}
+    others = {k: v for k, v in finals.items() if bills[k]["StatusID"] != PASSED}
+    counts = participation(fetch_results([v["Id"] for v in list(passed.values()) + list(others.values())]))
+    empty = {"for": 0, "against": 0, "abstain": 0}
+    enough = lambda c: c["for"] + c["against"] + c["abstain"] >= MIN_VOTERS
 
-    out = []
-    for bill_id, v in finals.items():
-        c = counts.get(v["Id"], {"for": 0, "against": 0, "abstain": 0})
-        if c["for"] + c["against"] + c["abstain"] < MIN_VOTERS:
-            continue
-        b = bills[bill_id]
-        out.append({
-            "billId": bill_id, "name": b["Name"], "voteId": v["Id"], "voteDate": v["VoteDateTime"][:10],
-            "category": category_for(committees.get(b["CommitteeID"])),
-            "for": c["for"], "against": c["against"], "abstain": c["abstain"],
-            "summaryLaw": b["SummaryLaw"],
-        })
-    out.sort(key=lambda x: -min(x["for"], x["against"]) / max(1, x["for"] + x["against"]))
-    with open(os.path.join(ROOT, "data", "candidates.json"), "w", encoding="utf-8") as fh:
-        json.dump(out, fh, ensure_ascii=False, indent=1)
-    hist = {}
-    for x in out:
-        hist[x["category"]] = hist.get(x["category"], 0) + 1
-    print("passed bills with final vote:", len(finals), "| candidates:", len(out))
-    print(json.dumps(hist, ensure_ascii=False))
+    write("candidates.json", [candidate(bills[k], v, counts.get(v["Id"], empty), committees)
+                              for k, v in passed.items() if enough(counts.get(v["Id"], empty))])
+    write("rejected_candidates.json", [candidate(bills[k], v, counts[v["Id"]], committees)
+                                       for k, v in others.items()
+                                       if v["Id"] in counts and enough(counts[v["Id"]]) and is_rejected(counts[v["Id"]])])
 
 
 if __name__ == "__main__":

@@ -64,13 +64,16 @@ def build_data(laws, results, votes, positions, people, lists):
         mk_ids = [str(c["mkId"]) for c in lst["candidates"] if c["mkId"]]
         used.update(int(m) for m in mk_ids)
         out_lists.append({"id": lst["id"], "name": lst["name"], "seats": lst["seats"],
-                          "total": lst["seats"], "mkIds": mk_ids})
+                          "total": lst["seats"], "mkIds": mk_ids, "letters": lst.get("letters"),
+                          "candidates": [{"name": c["name"], "mkId": str(c["mkId"]) if c["mkId"] else None}
+                                         for c in lst["candidates"]]})
 
     return {
         "generated": datetime.date.today().isoformat(),
         "pollDate": lists["pollDate"],
         "laws": [{"id": l["billId"], "title": l["title"], "summary": l["summary"], "details": l["details"],
-                  "category": l["category"], "voteDate": l["voteDate"], "url": LAW_URL % l["billId"]}
+                  "category": l["category"], "voteDate": l["voteDate"], "url": LAW_URL % l["billId"],
+                  "passed": l.get("passed", True)}
                  for l in laws],
         "mks": {str(i): names[i] for i in sorted(used) if i in names},
         "votes": out_votes,
@@ -89,6 +92,9 @@ def main():
     lists = load(os.path.join(ROOT, "content", "lists.json"))
     data = build_data(laws, load(os.path.join(RAW, "results.json")), load(os.path.join(RAW, "votes.json")),
                       load(os.path.join(RAW, "positions.json")), load(os.path.join(RAW, "people.json")), lists)
+    for name in ("polls", "voterinfo"):
+        path = os.path.join(ROOT, "content", name + ".json")
+        data[name] = load(path) if os.path.exists(path) else None
     for law in data["laws"]:
         assert len(data["votes"][str(law["id"])]) >= 40, law["id"]
     for lst in data["lists"]:

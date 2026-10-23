@@ -1,0 +1,87 @@
+{
+ "polls": 8,
+ "since": "2026-10-19",
+ "until": "2026-10-22",
+ "pollsters": [
+  "Direct Polls (i24 News)",
+  "LRI+P4A (Maariv)",
+  "LRI+P4A (Walla)",
+  "MP+TM+SN+A (Channel 13)",
+  "Maagar Mochot (Channel 16)",
+  "Midgam R&C (HaHadashot 12)",
+  "SF+ND (Channel 14)",
+  "Yossi Tatika (Zman Yisrael)"
+ ],
+ "lists": {
+  "likud": {
+   "polled": 8,
+   "passing": 8,
+   "avgSeats": 21.4
+  },
+  "together": {
+   "polled": 8,
+   "passing": 8,
+   "avgSeats": 13.4
+  },
+  "rzp": {
+   "polled": 8,
+   "passing": 8,
+   "avgSeats": 6.6
+  },
+  "otzma": {
+   "polled": 8,
+   "passing": 8,
+   "avgSeats": 7.9
+  },
+  "shas": {
+   "polled": 8,
+   "passing": 8,
+   "avgSeats": 7.8
+  },
+  "utj": {
+   "polled": 8,
+   "passing": 8,
+   "avgSeats": 7.5
+  },
+  "yb": {
+   "polled": 8,
+   "passing": 8,
+   "avgSeats": 7.5
+  },
+  "raam": {
+   "polled": 8,
+   "passing": 8,
+   "avgSeats": 5.5
+  },
+  "joint": {
+   "polled": 8,
+   "passing": 8,
+   "avgSeats": 8.6
+  },
+  "democrats": {
+   "polled": 8,
+   "passing": 8,
+   "avgSeats": 9.0
+  },
+  "yashar": {
+   "polled": 8,
+   "passing": 8,
+   "avgSeats": 21.4
+  },
+  "reservists": {
+   "polled": 8,
+   "passing": 5,
+   "avgSeats": 2.5
+  },
+  "amcha": {
+   "polled": 8,
+   "passing": 2,
+   "avgSeats": 1.0
+  },
+  "haredi": {
+   "polled": 6,
+   "passing": 0,
+   "avgSeats": 0.0
+  }
+ }
+}

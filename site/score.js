@@ -60,14 +60,48 @@ export function scoreLists(answers, data) {
   return rows.sort(byPct);
 }
 
-export function nextBatch(data, answers, categories, n = 10, rand = Math.random) {
-  const pool = data.laws
-    .filter((l) => !(l.id in answers))
-    .filter((l) => !categories.length || categories.includes(l.category))
-    .map((l) => l.id);
-  for (let i = pool.length - 1; i > 0; i--) {
-    const j = Math.floor(rand() * (i + 1));
-    [pool[i], pool[j]] = [pool[j], pool[i]];
+// Per answered law: how the given group voted (shares of counted MKs) and agreement with the user.
+// who: { faction: name } (faction at vote date) or { mkIds: [...] } (personal votes, any faction).
+export function breakdown(answers, data, who) {
+  const rows = [];
+  for (const [lawId, user] of answered(answers)) {
+    const entry = data.votes[lawId] || {};
+    const codes = who.faction
+      ? Object.values(entry).filter(([, f]) => f === who.faction).map(([c]) => c)
+      : who.mkIds.filter((id) => entry[id]).map((id) => entry[id][0]);
+    if (!codes.length) continue;
+    const share = (v) => Math.round((codes.filter((c) => c === v).length / codes.length) * 100);
+    const agree = codes.reduce((s, c) => s + 1 - Math.abs(user - c), 0) / codes.length;
+    rows.push({ lawId, user, n: codes.length, forPct: share(1), againstPct: share(0), abstainPct: share(0.5),
+      pct: Math.round(agree * 100) });
   }
-  return pool.slice(0, n);
+  return rows;
+}
+
+function shuffle(arr, rand) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// Half passed laws, half rejected bills, alternating; one pool tops up when the other runs out.
+// Otherwise answering "for" to everything would mostly match whoever held the majority.
+export function nextBatch(data, answers, categories, n = 10, rand = Math.random) {
+  const open = data.laws
+    .filter((l) => !(l.id in answers))
+    .filter((l) => !categories.length || categories.includes(l.category));
+  const pools = [
+    shuffle(open.filter((l) => l.passed !== false).map((l) => l.id), rand),
+    shuffle(open.filter((l) => l.passed === false).map((l) => l.id), rand),
+  ];
+  let turn = rand() < 0.5 ? 0 : 1;
+  const out = [];
+  while (out.length < n && (pools[0].length || pools[1].length)) {
+    if (!pools[turn].length) turn = 1 - turn;
+    out.push(pools[turn].shift());
+    turn = 1 - turn;
+  }
+  return out;
 }

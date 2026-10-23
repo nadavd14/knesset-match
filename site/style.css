@@ -106,3 +106,33 @@ h2 { font-size: 19px; margin: 0 0 10px; }
 .method ul { padding-inline-start: 18px; margin: 0 0 12px; }
 .method li { margin-bottom: 6px; }
 .fine { font-size: 13px; }
+
+/* result rows link to detail pages */
+.rowlink { display: block; color: inherit; text-decoration: none; }
+.rowlink:hover .name, .rowlink:focus-visible .name { text-decoration: underline; }
+.name { display: inline-flex; align-items: center; gap: 8px; }
+.letters {
+  display: inline-block; min-width: 2.4em; text-align: center;
+  font-size: 13px; font-weight: 800; letter-spacing: 0.5px;
+  padding: 2px 7px; border-radius: 6px;
+  border: 1.5px solid var(--ink); color: var(--ink); background: var(--card);
+}
+h1 .letters { font-size: 17px; vertical-align: middle; margin-inline-end: 10px; }
+.back { display: inline-block; margin-top: 14px; color: var(--muted); text-decoration: none; font-size: 15px; }
+
+/* per-law breakdown */
+.lawrow { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.lawrow .head { display: flex; justify-content: space-between; gap: 12px; font-weight: 600; }
+.split { display: flex; height: 8px; border-radius: 4px; overflow: hidden; background: var(--line); margin: 7px 0 5px; }
+.split .for { background: var(--bar); }
+.split .abs { background: var(--muted); opacity: .45; }
+.split .against { background: var(--ink); opacity: .75; }
+.cands { padding-inline-start: 22px; margin: 6px 0 14px; }
+.cands li { margin-bottom: 3px; }
+.tag { font-size: 12px; color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 1px 8px; margin-inline-start: 8px; }
+
+/* voter info */
+.card.info { margin: 14px 0; }
+.card.info h2 { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.card.info p { margin: 6px 0; }
+.nav { float: inline-end; font-size: 15px; font-weight: 600; text-decoration: none; }
