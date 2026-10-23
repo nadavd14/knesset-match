@@ -4,7 +4,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "pipeline"))
 from categories import category_for  # noqa: E402
-from select_votes import final_vote_by_bill, participation, MIN_VOTERS  # noqa: E402
+from select_votes import final_vote_by_bill, is_final_reading, participation, MIN_VOTERS  # noqa: E402
 
 
 def vote(id_, item, when, subject):
@@ -24,6 +24,18 @@ class FinalVoteTest(unittest.TestCase):
     def test_blank_subject_with_spaces_counts_as_whole_bill(self):
         votes = [vote(5, 9, "2024-01-01T10:00:00+02:00", "  ")]
         self.assertEqual(final_vote_by_bill(votes)[9]["Id"], 5)
+
+
+class FinalReadingTest(unittest.TestCase):
+    def test_final_vote_must_be_near_last_vote_of_bill(self):
+        early = vote(1, 1, "2026-03-24T03:18:00+02:00", None)
+        later = [early, vote(2, 1, "2026-06-04T01:41:00+03:00", "הסתייגות 267")]
+        self.assertFalse(is_final_reading(early, later))
+
+    def test_overnight_session_still_counts(self):
+        final = vote(1, 1, "2025-03-24T23:50:00+02:00", None)
+        votes = [final, vote(2, 1, "2025-03-25T00:40:00+02:00", "סעיף 9")]
+        self.assertTrue(is_final_reading(final, votes))
 
 
 class ParticipationTest(unittest.TestCase):

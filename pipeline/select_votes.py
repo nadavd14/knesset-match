@@ -2,6 +2,7 @@
 
 Writes data/raw/results.json (cache) and data/candidates.json (input to curation).
 """
+import datetime
 import json
 import os
 import sys
@@ -26,6 +27,19 @@ def final_vote_by_bill(votes):
         if cur is None or v["VoteDateTime"] > cur["VoteDateTime"]:
             best[v["ItemID"]] = v
     return best
+
+
+def _ts(v):
+    return datetime.datetime.fromisoformat(v["VoteDateTime"])
+
+
+def is_final_reading(final, bill_votes):
+    """The whole-bill vote must be within a day of the bill's last vote of any kind.
+
+    Otherwise the third-reading vote is missing from the data and `final` is an earlier reading.
+    """
+    last = max(_ts(v) for v in bill_votes)
+    return last - _ts(final) <= datetime.timedelta(days=1)
 
 
 def participation(results):
@@ -64,7 +78,12 @@ def main():
     sys.stdout.reconfigure(encoding="utf-8")
     bills = {b["Id"]: b for b in load("bills") if b["StatusID"] == PASSED}
     committees = {c["Id"]: c["Name"] for c in load("committees")}
-    finals = {k: v for k, v in final_vote_by_bill(load("votes")).items() if k in bills}
+    votes = load("votes")
+    by_bill = {}
+    for v in votes:
+        by_bill.setdefault(v["ItemID"], []).append(v)
+    finals = {k: v for k, v in final_vote_by_bill(votes).items()
+              if k in bills and is_final_reading(v, by_bill[k])}
     counts = participation(fetch_results([v["Id"] for v in finals.values()]))
 
     out = []

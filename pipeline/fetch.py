@@ -21,7 +21,8 @@ TABLES = {
         "$select": "Id,ItemID,VoteDateTime,VoteTitle,VoteSubject",
     }),
     "positions": ("KNS_PersonToPosition", {
-        "$filter": "KnessetNum eq 25 and (PositionID eq 43 or PositionID eq 61)",
+        # 43/61 = MK (male/female); 54 = faction member, the only rows carrying FactionName
+        "$filter": "KnessetNum eq 25 and (PositionID eq 43 or PositionID eq 61 or PositionID eq 54)",
         "$select": "PersonID,FactionName,StartDate,FinishDate",
     }),
     "people": ("KNS_Person", {"$select": "Id,FirstName,LastName"}),

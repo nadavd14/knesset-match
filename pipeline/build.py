@@ -10,6 +10,22 @@ LAW_URL = "https://main.knesset.gov.il/Activity/Legislation/Laws/Pages/LawBill.a
 CODES = {"בעד": 1, "נגד": 0, "נמנע": 0.5, "נוכח": 0.5}
 
 
+SHORT_FACTIONS = {
+    'התאחדות הספרדים שומרי תורה תנועתו של מרן הרב עובדיה יוסף זצ"ל': 'ש"ס',
+    "הציונות הדתית בראשות בצלאל סמוטריץ'": "הציונות הדתית",
+    "עוצמה יהודית בראשות איתמר בן גביר": "עוצמה יהודית",
+    "נעם - בראשות אבי מעוז": "נעם",
+    'חה"כ עידן רול': "עידן רול (יחיד)",
+}
+
+
+def short_faction(name):
+    if name is None:
+        return None
+    name = name.strip()
+    return SHORT_FACTIONS.get(name, name)
+
+
 def result_code(desc):
     return CODES.get(desc)
 
@@ -18,7 +34,7 @@ def faction_at(positions, mk_id, when):
     """FactionName of the MK's position covering `when` (Start <= when < Finish)."""
     t = when[:19]
     for p in positions:
-        if p["PersonID"] != mk_id:
+        if p["PersonID"] != mk_id or not p["FactionName"]:
             continue
         if p["StartDate"][:19] <= t and (p["FinishDate"] is None or t < p["FinishDate"][:19]):
             return p["FactionName"]
@@ -39,7 +55,7 @@ def build_data(laws, results, votes, positions, people, lists):
             code = result_code(r["ResultDesc"])
             if code is None:
                 continue
-            entry[str(r["MkId"])] = [code, faction_at(positions, r["MkId"], when[law["voteId"]])]
+            entry[str(r["MkId"])] = [code, short_faction(faction_at(positions, r["MkId"], when[law["voteId"]]))]
             used.add(r["MkId"])
         out_votes[str(law["billId"])] = entry
 
@@ -48,7 +64,7 @@ def build_data(laws, results, votes, positions, people, lists):
         mk_ids = [str(c["mkId"]) for c in lst["candidates"] if c["mkId"]]
         used.update(int(m) for m in mk_ids)
         out_lists.append({"id": lst["id"], "name": lst["name"], "seats": lst["seats"],
-                          "total": len(lst["candidates"]), "mkIds": mk_ids})
+                          "total": lst["seats"], "mkIds": mk_ids})
 
     return {
         "generated": datetime.date.today().isoformat(),

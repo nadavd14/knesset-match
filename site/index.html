@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>מי מצביע כמוני?</title>
+  <meta name="description" content="מצביעים על חוקים אמיתיים מהכנסת ה-25 ורואים עם אילו רשימות וסיעות אתם הכי מסכימים. בלי שרת, התשובות נשארות במכשיר.">
+  <meta property="og:title" content="מי מצביע כמוני?">
+  <meta property="og:description" content="בעד, נגד או לא יודע: 10 חוקים אמיתיים מהכנסת, ואחוז ההתאמה שלכם לכל רשימה.">
+  <meta property="og:image" content="og.png">
+  <meta name="theme-color" content="#1f3a6e">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f3a6e'/%3E%3Cpath d='M9 17l5 5 9-11' stroke='white' stroke-width='3.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="./">מי מצביע כמוני?</a>
+  </header>
+  <main id="app" aria-live="polite"><p class="loading">טוען…</p></main>
+  <footer class="method">
+    <h2>איך זה מחושב</h2>
+    <ul>
+      <li>לכל חוק נלקחה ההצבעה הסופית במליאה על החוק כולו, רק חוקים שעברו ושהצביעו עליהם לפחות 40 ח״כים.</li>
+      <li>ח״כ שהצביע כמוכם = התאמה מלאה, הפוך מכם = אפס, נמנע = חצי. ח״כ שלא הצביע לא נספר. "לא יודע" מוציא את החוק מהחישוב.</li>
+      <li><b>רשימות 2026:</b> לפי ההצבעות האישיות של מועמדים במקומות ריאליים שכיהנו בכנסת ה-25, גם אם ישבו אז בסיעה אחרת. מקום ריאלי = ממוצע הסקרים ועוד 2. מועמדים חדשים לא נספרים, כי אין להם היסטוריית הצבעות.</li>
+      <li><b>סיעות הכנסת ה-25:</b> כל ח״כ נספר בסיעה שבה ישב ביום ההצבעה.</li>
+    </ul>
+    <p class="fine" id="sources">מקורות: מאגר הנתונים הפתוח של הכנסת · רשימות המועמדים כפי שפורסמו בכיפה (21.10.2026) · ממוצע 8 סקרים, 19–22.10.2026.
+      האתר אינו ממליץ למי להצביע ואינו קשור לאף מפלגה. התשובות לא יוצאות מהמכשיר שלך.
+      <a href="https://github.com/nadavd14/knesset-match">קוד ונתונים</a></p>
+  </footer>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

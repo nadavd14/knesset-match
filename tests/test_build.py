@@ -6,6 +6,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "pipeline"))
 from build import faction_at, result_code, build_data  # noqa: E402
 
 POSITIONS = [
+    {"PersonID": 1, "FactionName": None, "StartDate": "2022-11-15T00:00:00", "FinishDate": None},  # plain MK row
     {"PersonID": 1, "FactionName": "A", "StartDate": "2022-11-15T00:00:00", "FinishDate": "2024-03-01T00:00:00"},
     {"PersonID": 1, "FactionName": "B", "StartDate": "2024-03-01T00:00:00", "FinishDate": None},
     {"PersonID": 2, "FactionName": "C", "StartDate": "2022-11-15T00:00:00", "FinishDate": None},
@@ -17,6 +18,16 @@ class FactionTest(unittest.TestCase):
         self.assertEqual(faction_at(POSITIONS, 1, "2024-02-01T10:00:00+02:00"), "A")
         self.assertEqual(faction_at(POSITIONS, 1, "2024-05-01T10:00:00+03:00"), "B")
         self.assertIsNone(faction_at(POSITIONS, 3, "2024-05-01T10:00:00+03:00"))
+
+
+class FactionNameTest(unittest.TestCase):
+    def test_faction_names_shortened_and_trimmed(self):
+        from build import short_faction
+        self.assertEqual(short_faction("הליכוד "), "הליכוד")
+        self.assertEqual(short_faction('התאחדות הספרדים שומרי תורה תנועתו של מרן הרב עובדיה יוסף זצ"ל'), 'ש"ס')
+        self.assertEqual(short_faction("עוצמה יהודית בראשות איתמר בן גביר"), "עוצמה יהודית")
+        self.assertEqual(short_faction("יש עתיד"), "יש עתיד")
+        self.assertIsNone(short_faction(None))
 
 
 class ResultCodeTest(unittest.TestCase):
@@ -48,7 +59,8 @@ class BuildShapeTest(unittest.TestCase):
         self.assertIn("lawitemid=10", d["laws"][0]["url"])
         self.assertEqual(d["votes"]["10"], {"1": [1, "B"], "2": [0.5, "C"]})
         self.assertEqual(d["mks"], {"1": "דנה לוי", "2": "רון כהן"})
-        self.assertEqual(d["lists"], [{"id": "a", "name": "א", "seats": 3, "total": 2, "mkIds": ["1"]}])
+        # total = realistic spots (seats), even when fewer candidate names are known
+        self.assertEqual(d["lists"], [{"id": "a", "name": "א", "seats": 3, "total": 3, "mkIds": ["1"]}])
         self.assertEqual(d["pollDate"], "2026-10-22")
 
 
