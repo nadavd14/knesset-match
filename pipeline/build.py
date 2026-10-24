@@ -73,7 +73,9 @@ def build_data(laws, results, votes, positions, people, lists):
         "pollDate": lists["pollDate"],
         "laws": [{"id": l["billId"], "title": l["title"], "summary": l["summary"], "details": l["details"],
                   "category": l["category"], "voteDate": l["voteDate"], "url": LAW_URL % l["billId"],
-                  "passed": l.get("passed", True)}
+                  "passed": l.get("passed", True),
+                  "args": {"for": l["argFor"], "against": l["argAgainst"], "sources": l.get("argSources", [])}
+                  if l.get("argFor") and l.get("argAgainst") else None}
                  for l in laws],
         "mks": {str(i): names[i] for i in sorted(used) if i in names},
         "votes": out_votes,
@@ -96,7 +98,7 @@ def main():
         path = os.path.join(ROOT, "content", name + ".json")
         data[name] = load(path) if os.path.exists(path) else None
     for law in data["laws"]:
-        assert len(data["votes"][str(law["id"])]) >= 40, law["id"]
+        assert len(data["votes"][str(law["id"])]) >= 20, law["id"]
     for lst in data["lists"]:
         assert all(m in data["mks"] for m in lst["mkIds"]), lst["id"]
     os.makedirs(os.path.join(ROOT, "site", "data"), exist_ok=True)

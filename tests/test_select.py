@@ -4,7 +4,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "pipeline"))
 from categories import category_for  # noqa: E402
-from select_votes import final_vote_by_bill, is_final_reading, is_rejected, participation, MIN_VOTERS  # noqa: E402
+from select_votes import final_vote_by_bill, is_final_reading, is_rejected, participation, MIN_VOTERS, MIN_VOTERS_PASSED  # noqa: E402
 
 
 def vote(id_, item, when, subject):
@@ -51,7 +51,8 @@ class ParticipationTest(unittest.TestCase):
         self.assertEqual(participation(results)[7], {"for": 2, "against": 1, "abstain": 1})
 
     def test_participation_threshold(self):
-        self.assertEqual(MIN_VOTERS, 40)
+        self.assertEqual(MIN_VOTERS, 30)
+        self.assertEqual(MIN_VOTERS_PASSED, 20)
 
 
 class CategoryTest(unittest.TestCase):

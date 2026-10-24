@@ -13,7 +13,8 @@ from categories import category_for
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 RAW = os.path.join(ROOT, "data", "raw")
 PASSED = 118
-MIN_VOTERS = 40
+MIN_VOTERS = 30          # rejected bills
+MIN_VOTERS_PASSED = 20   # passed laws: third readings often draw fewer MKs
 CHUNK = 8
 
 
@@ -112,10 +113,10 @@ def main():
     others = {k: v for k, v in finals.items() if bills[k]["StatusID"] != PASSED}
     counts = participation(fetch_results([v["Id"] for v in list(passed.values()) + list(others.values())]))
     empty = {"for": 0, "against": 0, "abstain": 0}
-    enough = lambda c: c["for"] + c["against"] + c["abstain"] >= MIN_VOTERS
+    enough = lambda c, n=MIN_VOTERS: c["for"] + c["against"] + c["abstain"] >= n
 
     write("candidates.json", [candidate(bills[k], v, counts.get(v["Id"], empty), committees)
-                              for k, v in passed.items() if enough(counts.get(v["Id"], empty))])
+                              for k, v in passed.items() if enough(counts.get(v["Id"], empty), MIN_VOTERS_PASSED)])
     write("rejected_candidates.json", [candidate(bills[k], v, counts[v["Id"]], committees)
                                        for k, v in others.items()
                                        if v["Id"] in counts and enough(counts[v["Id"]]) and is_rejected(counts[v["Id"]])])

@@ -92,6 +92,11 @@ function renderStart() {
   );
 }
 
+function argLink(sources, side) {
+  const src = (sources || []).find((x) => x.side === side && x.url);
+  return src ? [" ", h("a", { href: src.url, target: "_blank", rel: "noopener", class: "srclink" }, "(מקור)")] : null;
+}
+
 function renderCard() {
   const law = lawById(state.batch[state.idx]);
   const shownAt = Date.now();
@@ -125,6 +130,9 @@ function renderCard() {
       h("details", { class: "more" },
         h("summary", {}, "פרטים נוספים"),
         h("p", {}, law.details),
+        law.args ? h("div", { class: "args" },
+          h("p", {}, h("b", {}, "בעד: "), law.args.for, argLink(law.args.sources, "for")),
+          h("p", {}, h("b", {}, "נגד: "), law.args.against, argLink(law.args.sources, "against"))) : null,
         h("p", { class: "meta" }, h("a", { href: law.url, target: "_blank", rel: "noopener" }, "לעמוד החוק באתר הכנסת")))),
     h("div", { class: "answers", role: "group", "aria-label": "התשובה שלך" },
       h("button", { class: "btn", onclick: () => answer(1) }, "✓ בעד"),

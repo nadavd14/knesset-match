@@ -191,3 +191,7 @@ h2 { font-size: 19px; margin: 0 0 10px; }
 .topmatch .name { flex-wrap: wrap; }
 .topmatch .big { flex-shrink: 0; }
 @media (max-width: 480px) { .topmatch .big { font-size: 36px; } .topmatch .who strong { font-size: 18px; } }
+
+.args { background: var(--accent-soft); border-radius: 12px; padding: 8px 12px; margin: 10px 0; }
+.args p { margin: 6px 0; font-size: 15px; }
+.srclink { font-size: 13px; }

@@ -42,7 +42,8 @@ class ResultCodeTest(unittest.TestCase):
 class BuildShapeTest(unittest.TestCase):
     def test_build_shape(self):
         laws = [{"billId": 10, "voteId": 100, "title": "t", "summary": "s", "details": "d",
-                 "category": "כלכלה", "voteDate": "2024-05-01", "passed": False}]
+                 "category": "כלכלה", "voteDate": "2024-05-01", "passed": False,
+                 "argFor": "a", "argAgainst": "b", "argSources": [{"side": "for", "url": "u"}]}]
         results = [
             {"VoteID": 100, "MkId": 1, "ResultDesc": "בעד"},
             {"VoteID": 100, "MkId": 2, "ResultDesc": "נמנע"},
@@ -64,6 +65,7 @@ class BuildShapeTest(unittest.TestCase):
         self.assertEqual(d["lists"], [{"id": "a", "name": "א", "seats": 3, "total": 3, "mkIds": ["1"], "letters": "אב", "logo": "logos/a.png",
                                        "candidates": [{"name": "דנה לוי", "mkId": "1"}, {"name": "z", "mkId": None}]}])
         self.assertIs(d["laws"][0]["passed"], False)
+        self.assertEqual(d["laws"][0]["args"], {"for": "a", "against": "b", "sources": [{"side": "for", "url": "u"}]})
         self.assertEqual(d["pollDate"], "2026-10-22")
 
 
